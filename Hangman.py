@@ -7,15 +7,15 @@ from tools.Network import NetworkM
 Colour = Colours()
 
 # TODO: Server-side word and guess handling
-# TODO: Guessing punishments
-# TODO: Hints under word layout
-# TODO: Chat system using new data format
+# TODO: Guessing punishments - done
+# TODO: Hints under word layout - done
+# TODO: Chat system using new data format - done
 
 
 class Hangman:
     def __init__(self):
 
-        self._VERSION = 1.00
+        self._VERSION = 1.01
         self.GAME_CODE = ''
         self.GAME_WORD = ''
         self.GAME_LIVES = 10
@@ -32,6 +32,8 @@ class Hangman:
         self.Missing = Label(self.Window, text='H _ N G M _ N', width=40, height=1, font=('Tahoma', 25, 'bold'), bg='#141414', fg='WHITE', anchor='w')
         self.State = Label(self.Window, text='Waiting for match', font=('MS PGothic', 12, 'bold'), bg='#141414', width=16, fg=Colour.GREY, anchor='e')
         self.Lives = Label(self.Window, text='-- Lives remaining', font=('MS PGothic', 16, 'bold'), bg='#141414', width=16, fg=Colour.GREY, anchor='e')
+        self.Subtitle = Label(self.Window, text='Warning', font=('Arial', 10, 'bold '), bg='#141414', width=30, fg=Colour.ORANGE, anchor='w')
+        self.Warning = Label(self.Window, text='Submitting an incorrect guess will cost two lives for the whole team.', font=('Arial', 10, ' '), bg='#141414', fg=Colour.LIGHT_GREY)
         self.Host = Button(self.Window, text='Host match', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.ORANGE, bd=0, command=lambda: self.word())
         self.Join = Button(self.Window, text='Join match', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.LIGHT_BLUE, bd=0, command=lambda: self.code())
         self.Leave = Button(self.Window, text='Leave match', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.RED, bd=0, command=lambda: self.leave())
@@ -104,12 +106,26 @@ class Hangman:
         self.Missing.config(text='H _ N G M _ N')
         self.build()
 
+    def warn(self, m, t='Warning'):
+        self.Subtitle.place(relx=.05, rely=.66)
+        self.Subtitle.config(text=t)
+        self.Warning.place(relx=.05, rely=.725)
+        self.Warning.config(text=m)
+
+    def clear(self):
+        self.Subtitle.place_forget()
+        self.Warning.place_forget()
+
     def solve(self):
         self.Session.send(str({'data-type': 'word-guess', 'word': self.Solved.get(), 'token': self.GAME_CODE}))
+        self.Solved.delete(0, END)
+        self.Solved.place_forget()
+        self.clear()
 
     def allow(self):
         self.Solved.place(relx=.67, rely=.85)
         self.Solved.bind('<Return>', lambda event: self.solve())
+        self.warn('Submitting an incorrect will cost the whole team two lives.', 'Guessing')
 
     def guess(self, l):
         for Letter in self.Buttons:
@@ -121,11 +137,11 @@ class Hangman:
                 self.GAME_LIVES -= 1
                 self.Session.send(str({'data-type': 'game-lives', 'lives': str(self.GAME_LIVES), 'token': self.GAME_CODE}))
         self.validate(l)
-        if '_' not in list(self.MISSING_WORD) or self.GAME_LIVES == 0:
+        if '_' not in list(self.MISSING_WORD) or self.GAME_LIVES <= 0:
             self.state(2)
         if self.Mode == 'Host' and self.GAME_LIVES == 1:
             self.Lives.config(text='1 Life remaining')
-            self.Session.send(str({'data-type': 'game-priority', 'chat': 'Only 1 life remaining!', 'token': self.GAME_CODE}))
+            self.Window.after(200, lambda: self.Session.send(str({'data-type': 'game-priority', 'chat': 'Only 1 life remaining!', 'token': self.GAME_CODE})))
 
     def submit(self):
         if self.Mode == 'Join':
@@ -159,6 +175,7 @@ class Hangman:
         self.Chat.place(relx=.21, rely=.85)
         self.Request.place(relx=.355, rely=.85)
         self.Missing.config(text='Waiting for game...')
+        self.show('GAME: Host is choosing a new word.' )
 
     def rebuild(self):
         self.Restarting = True

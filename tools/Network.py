@@ -70,8 +70,9 @@ class NetworkM:
                             self.gameInstance.state(2)
                         else:
                             if self.gameInstance.Mode == 'Host':
-                                self.gameInstance.GAME_LIVES -= 1
-                                self.send(str({'data-type': 'game-lives', 'lives': str(self.gameInstance.GAME_LIVES), 'token': self.gameInstance.GAME_CODE}))
+                                self.gameInstance.GAME_LIVES -= 2
+                                self.gameInstance.Window.after(1, lambda: self.send(str({'data-type': 'game-lives', 'lives': str(self.gameInstance.GAME_LIVES), 'token': self.gameInstance.GAME_CODE})))
+                                self.gameInstance.Window.after(510, lambda: self.send(str({'data-type': 'game-notification', 'chat': 'Someone guessed incorrectly!', 'token': self.gameInstance.GAME_CODE})))
                     elif sessionData['data-type'] == 'missing-word':
                         self.gameInstance.MISSING_WORD = sessionData['word']
                         self.gameInstance.handle()

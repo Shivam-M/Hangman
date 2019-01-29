@@ -46,7 +46,7 @@ class NetworkM:
     def listen(self):
         while self.activeConnection:
             try:
-                receivedData = self.gameSocket.recv(70).decode()
+                receivedData = self.gameSocket.recv(100).decode()
             except:
                 receivedData = None
             if receivedData:
@@ -68,6 +68,10 @@ class NetworkM:
                     elif sessionData['data-type'] == 'word-guess':
                         if sessionData['word'].upper() == self.gameInstance.GAME_WORD.upper():
                             self.gameInstance.state(2)
+                        else:
+                            if self.gameInstance.Mode == 'Host':
+                                self.gameInstance.GAME_LIVES -= 1
+                                self.send(str({'data-type': 'game-lives', 'lives': str(self.gameInstance.GAME_LIVES), 'token': self.gameInstance.GAME_CODE}))
                     elif sessionData['data-type'] == 'missing-word':
                         self.gameInstance.MISSING_WORD = sessionData['word']
                         self.gameInstance.handle()
@@ -80,6 +84,12 @@ class NetworkM:
                     elif sessionData['data-type'] == 'refresh-game':
                         if self.gameInstance.Mode == 'Join':
                             self.gameInstance.restart()
+                    elif sessionData['data-type'] == 'game-chat':
+                        self.gameInstance.show('CHAT: ' +  sessionData['chat'])
+                    elif sessionData['data-type'] == 'game-notification':
+                        self.gameInstance.show('GAME: ' +  sessionData['chat'])
+                    elif sessionData['data-type'] == 'game-priority':
+                        self.gameInstance.show('GAME: ' + sessionData['chat'], 1)
 
         Logger.log('Connection error - no longer listening.', 'ERROR')
 

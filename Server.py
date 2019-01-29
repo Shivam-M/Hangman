@@ -30,6 +30,7 @@ class Host:
                     connectedSocket.send(str.encode(m))
         except Exception as error:
             Logger.error(error)
+        Logger.log(m, 'MESSAGE')
 
     def listen(self):
         while True:
@@ -42,7 +43,7 @@ class Host:
                         Logger.log(f'Client [{address[0]}:{address[1]}] connected to the server.', 'CONNECT')
                     else:
                         try:
-                            receivedData = sock.recv(70).decode()
+                            receivedData = sock.recv(100).decode()
                         except:
                             try:
                                 Logger.log(f'Client [{address[0]}:{address[1]}] disconnected from the server.', 'DISCONNECT')

@@ -6,11 +6,16 @@ from tools.Colours import Colours
 from tools.Network import NetworkM
 Colour = Colours()
 
+# TODO: Server-side word and guess handling
+# TODO: Guessing punishments
+# TODO: Hints under word layout
+# TODO: Chat system using new data format
+
 
 class Hangman:
     def __init__(self):
 
-        self._VERSION = 0.99
+        self._VERSION = 1.00
         self.GAME_CODE = ''
         self.GAME_WORD = ''
         self.GAME_LIVES = 10
@@ -21,6 +26,8 @@ class Hangman:
         self.Window.config(bg='#141414')
         self.Window.title(f'Hangman - Version {self._VERSION}')
 
+        self.Frame = Frame(self.Window, bg='#141414')
+
         self.Title = Label(self.Window, text='Hangman', font=('MS PGothic', 20, 'bold'), bg='#141414', fg='WHITE').place(relx=.05, rely=.1)
         self.Missing = Label(self.Window, text='H _ N G M _ N', width=40, height=1, font=('Tahoma', 25, 'bold'), bg='#141414', fg='WHITE', anchor='w')
         self.State = Label(self.Window, text='Waiting for match', font=('MS PGothic', 12, 'bold'), bg='#141414', width=16, fg=Colour.GREY, anchor='e')
@@ -29,19 +36,28 @@ class Hangman:
         self.Join = Button(self.Window, text='Join match', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.LIGHT_BLUE, bd=0, command=lambda: self.code())
         self.Leave = Button(self.Window, text='Leave match', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.RED, bd=0, command=lambda: self.leave())
         self.Guess = Button(self.Window, text='Submit guess', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.DARK_SEA_GREEN, bd=0, command=lambda: self.allow())
-        self.Chat = Button(self.Window, text='Toggle chat', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.PURPLE, bd=0)
+        self.Chat = Button(self.Window, text='Toggle chat', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.PURPLE, bd=0, command=lambda: self.toggle())
         self.Request = Button(self.Window, text='Request lives', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.YELLOW, bd=0, command=lambda: self.request())
         self.Accept = Button(self.Window, text='Accept request', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.YELLOW, bd=0, command=lambda: self.accept())
         self.Restart = Button(self.Window, text='Restart match', font=('MS PGothic', 12, 'bold'), bg='#141414', fg=Colour.LIGHT_ORANGE, bd=0, command=lambda: self.rebuild())
+        self.Send = Button(self.Frame, text='→', font=('Courier new', 12, 'bold'), bg='#141414', fg='WHITE', bd=0, command=lambda: self.chat())
         self.Code = Entry(self.Window, font=('MS PGothic', 10, 'bold'), width=22, bg='#141414', fg='WHITE', bd=4)
         self.Word = Entry(self.Window, font=('MS PGothic', 10, 'bold'), width=22, bg='#141414', fg='WHITE', bd=4, show='*')
         self.Solved = Entry(self.Window, font=('MS PGothic', 10, 'bold'), width=11, bg='#141414', fg='WHITE', bd=4)
+        self.Message = Entry(self.Frame, font=('Courier new', 10, 'bold'), width=30, bg='#141414', fg='WHITE', bd=4)
+        self.History = Text(self.Frame, bg='#141414', bd=2, height=6, width=35)
 
         self.Missing.place(relx=.0495, rely=.25)
         self.Host.place(relx=.05, rely=.85)
         self.Join.place(relx=.20, rely=.85)
         self.State.place(relx=.75, rely=.85)
         self.Lives.place(relx=.615, rely=.27)
+
+        self.History.place(relx=.006, rely=.0)
+        self.Message.place(relx=.006, rely=.8)
+        self.Send.place(relx=.89, rely=.8)
+
+        self.Message.bind('<Return>', lambda event: self.chat())
 
         self.Letters = list(ascii_uppercase)
         self.Buttons = []
@@ -52,6 +68,7 @@ class Hangman:
         self.Mode = ''
         self.Requested = True
         self.Restarting = False
+        self.Chatting = False
 
         self.Window.mainloop()
 
@@ -82,6 +99,7 @@ class Hangman:
         self.Guess.place_forget()
         self.Chat.place_forget()
         self.Request.place_forget()
+        self.Restart.place_forget()
         self.Lives.config(text='-- Lives remaining')
         self.Missing.config(text='H _ N G M _ N')
         self.build()
@@ -105,6 +123,9 @@ class Hangman:
         self.validate(l)
         if '_' not in list(self.MISSING_WORD) or self.GAME_LIVES == 0:
             self.state(2)
+        if self.Mode == 'Host' and self.GAME_LIVES == 1:
+            self.Lives.config(text='1 Life remaining')
+            self.Session.send(str({'data-type': 'game-priority', 'chat': 'Only 1 life remaining!', 'token': self.GAME_CODE}))
 
     def submit(self):
         if self.Mode == 'Join':
@@ -205,8 +226,26 @@ class Hangman:
     def draw(self):
         self.Accept.place(relx=.36, rely=.85)
 
+    def toggle(self):
+        self.Chatting = not self.Chatting
+        if self.Chatting:
+            self.Frame.place(relx=.59, rely=.4, width=290, height=130)
+        else:
+            self.Frame.place_forget()
+
     def chat(self):
-        pass
+        if len(self.Message.get()) < 20:
+            self.Session.send(str({'data-type': 'game-chat', 'chat': self.Message.get(), 'token': self.GAME_CODE}))
+        self.Message.delete(0, END)
+
+    def show(self, m, importance=0):
+        if importance == 0:
+            self.History.tag_config("message", foreground=Colour.RED, underline=0)
+            self.History.insert(INSERT , '\n' + m, "message")
+        else:
+            self.History.tag_config("notification", foreground=Colour.RED, underline=1)
+            self.History.insert(INSERT, '\n' + m, "notification")
+        self.History.see(END)
 
     def state(self, state):
         if state == 0:

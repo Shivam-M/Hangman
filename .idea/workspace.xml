@@ -4,6 +4,7 @@
     <list default="true" id="53113028-de47-4e0c-be7f-15225a844da7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hangman.py" beforeDir="false" afterPath="$PROJECT_DIR$/Hangman.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tools/Network.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Network.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Hangman.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+            <state relative-caret-position="587">
+              <caret line="135" column="22" selection-start-line="135" selection-start-column="22" selection-end-line="135" selection-end-column="22" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -29,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tools/Network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="75" column="205" selection-start-line="75" selection-start-column="205" selection-end-line="75" selection-end-column="205" />
+            <state relative-caret-position="621">
+              <caret line="89" column="59" selection-start-line="89" selection-start-column="59" selection-end-line="89" selection-end-column="59" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -38,14 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="45" column="56" selection-start-line="45" selection-start-column="56" selection-end-line="45" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="451">
+              <caret line="74" column="94" lean-forward="true" selection-start-line="74" selection-start-column="94" selection-end-line="74" selection-end-column="94" />
             </state>
           </provider>
         </entry>
@@ -97,6 +95,11 @@
       <find>self.solve</find>
       <find>def solve</find>
       <find>waiting for</find>
+      <find>self.solve(</find>
+      <find>self.guess</find>
+      <find>self.GAME_WORD</find>
+      <find>handle</find>
+      <find>'missing-wor</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -122,9 +125,9 @@
         <option value="$PROJECT_DIR$/NW2.py" />
         <option value="$PROJECT_DIR$/Network.py" />
         <option value="$PROJECT_DIR$/tools/Logger.py" />
-        <option value="$PROJECT_DIR$/Server.py" />
         <option value="$PROJECT_DIR$/tools/Network.py" />
         <option value="$PROJECT_DIR$/Hangman.py" />
+        <option value="$PROJECT_DIR$/Server.py" />
       </list>
     </option>
   </component>
@@ -430,26 +433,32 @@
       <option name="project" value="LOCAL" />
       <updated>1548795655647</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Version 1.01 - Network optimizations and added hints/warnings">
+      <created>1548801475079</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1548801475079</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.497191" visible="true" weight="0.115384616" />
       <window_info id="Structure" order="1" sideWeight="0.502809" side_tool="true" weight="0.07376186" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4963119" visible="true" weight="0.38786566" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49578503" visible="true" weight="0.31527627" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49947312" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5036881" side_tool="true" weight="0.31960997" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50421494" side_tool="true" weight="0.31527627" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -458,7 +467,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Version 1.00 - Added chat system which can be toggled on/off" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 1.00 - Added chat system which can be toggled on/off" />
+    <MESSAGE value="Version 1.01 - Network optimizations and added hints/warnings" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 1.01 - Network optimizations and added hints/warnings" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/tkinter/__init__.py" />
@@ -536,16 +546,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="45" column="56" selection-start-line="45" selection-start-column="56" selection-end-line="45" selection-end-column="56" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tools/Logger.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -556,23 +556,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools/Network.py">
+    <entry file="file://$PROJECT_DIR$/Hangman.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="75" column="205" selection-start-line="75" selection-start-column="205" selection-end-line="75" selection-end-column="205" />
+        <state relative-caret-position="587">
+          <caret line="135" column="22" selection-start-line="135" selection-start-column="22" selection-end-line="135" selection-end-column="22" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Hangman.py">
+    <entry file="file://$PROJECT_DIR$/tools/Network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="38" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
+        <state relative-caret-position="621">
+          <caret line="89" column="59" selection-start-line="89" selection-start-column="59" selection-end-line="89" selection-end-column="59" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="451">
+          <caret line="74" column="94" lean-forward="true" selection-start-line="74" selection-start-column="94" selection-end-line="74" selection-end-column="94" />
         </state>
       </provider>
     </entry>

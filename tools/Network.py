@@ -16,7 +16,7 @@ class NetworkM:
         self.gameInstance = g
 
         self.gameSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.gameSocket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+        # self.gameSocket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         self.gameSocket.settimeout(None)
 
         self.listeningThread = Thread(target=self.listen)
@@ -50,6 +50,7 @@ class NetworkM:
             except:
                 receivedData = None
             if receivedData:
+                print(receivedData)
                 try:
                     sessionData = literal_eval(receivedData)
                 except:
@@ -60,8 +61,10 @@ class NetworkM:
                     elif sessionData['data-type'] == 'game-lives':
                         self.gameInstance.GAME_LIVES = int(sessionData['lives'])
                         self.gameInstance.Lives.config(text=f'{sessionData["lives"]} Lives remaining')
-                        if self.gameInstance.GAME_LIVES == 0:
+                        if self.gameInstance.GAME_LIVES <= 0:
                             self.gameInstance.state(2)
+                        if self.gameInstance.GAME_LIVES == 1 and self.gameInstance.Mode == 'Host':
+                            self.gameInstance.Window.after(200, lambda: self.send(str({'data-type': 'game-priority', 'chat': 'Only 1 life remaining!', 'token': self.gameInstance.GAME_CODE})))
                     elif sessionData['data-type'] == 'game-word':
                         self.gameInstance.GAME_WORD = sessionData['word']
                         self.gameInstance.handle()
@@ -76,6 +79,7 @@ class NetworkM:
                     elif sessionData['data-type'] == 'missing-word':
                         self.gameInstance.MISSING_WORD = sessionData['word']
                         self.gameInstance.handle()
+                        self.gameInstance.validate()
                     elif sessionData['data-type'] == 'lives-request':
                         if self.gameInstance.Mode == 'Host':
                             self.gameInstance.draw()

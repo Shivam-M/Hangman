@@ -56,36 +56,13 @@ class NetworkM:
                 except:
                     continue
                 if sessionData['token'] == self.gameInstance.GAME_CODE:
-                    if sessionData['data-type'] == 'letter-guess':
-                        self.gameInstance.guess(sessionData['letter'])
-                    elif sessionData['data-type'] == 'game-lives':
-                        self.gameInstance.GAME_LIVES = int(sessionData['lives'])
-                        self.gameInstance.Lives.config(text=f'{sessionData["lives"]} Lives remaining')
-                        if self.gameInstance.GAME_LIVES <= 0:
-                            self.gameInstance.state(2)
-                        if self.gameInstance.GAME_LIVES == 1 and self.gameInstance.Mode == 'Host':
-                            self.gameInstance.Window.after(200, lambda: self.send(str({'data-type': 'game-priority', 'chat': 'Only 1 life remaining!', 'token': self.gameInstance.GAME_CODE})))
-                    elif sessionData['data-type'] == 'game-word':
-                        self.gameInstance.GAME_WORD = sessionData['word']
-                        self.gameInstance.handle()
-                    elif sessionData['data-type'] == 'word-guess':
-                        if sessionData['word'].upper() == self.gameInstance.GAME_WORD.upper():
-                            self.gameInstance.state(2)
-                        else:
-                            if self.gameInstance.Mode == 'Host':
-                                self.gameInstance.GAME_LIVES -= 2
-                                self.gameInstance.Window.after(1, lambda: self.send(str({'data-type': 'game-lives', 'lives': str(self.gameInstance.GAME_LIVES), 'token': self.gameInstance.GAME_CODE})))
-                                self.gameInstance.Window.after(510, lambda: self.send(str({'data-type': 'game-notification', 'chat': 'Someone guessed incorrectly!', 'token': self.gameInstance.GAME_CODE})))
-                    elif sessionData['data-type'] == 'missing-word':
-                        self.gameInstance.MISSING_WORD = sessionData['word']
-                        self.gameInstance.handle()
-                        self.gameInstance.validate()
+                    if sessionData['data-type'] == 'game-update':
+                        self.gameInstance.MISSING_WORD = sessionData['missing']
+                        self.gameInstance.GAME_LIVES = sessionData['lives']
+                        self.gameInstance.update()
                     elif sessionData['data-type'] == 'lives-request':
                         if self.gameInstance.Mode == 'Host':
                             self.gameInstance.draw()
-                    elif sessionData['data-type'] == 'refresh':
-                        if self.gameInstance.Mode == 'Host':
-                            self.gameInstance.refresh()
                     elif sessionData['data-type'] == 'refresh-game':
                         if self.gameInstance.Mode == 'Join':
                             self.gameInstance.restart()
@@ -95,6 +72,9 @@ class NetworkM:
                         self.gameInstance.show('GAME: ' +  sessionData['chat'])
                     elif sessionData['data-type'] == 'game-priority':
                         self.gameInstance.show('GAME: ' + sessionData['chat'], 1)
+                    elif sessionData['data-type'] == 'over':
+                        self.gameInstance.GAME_WORD = sessionData['word']
+                        self.gameInstance.state(2)
 
         Logger.log('Connection error - no longer listening.', 'ERROR')
 

@@ -15,7 +15,7 @@ Colour = Colours()
 class Hangman:
     def __init__(self):
 
-        self._VERSION = 1.01
+        self._VERSION = 1.03
         self.GAME_CODE = ''
         self.GAME_WORD = ''
         self.GAME_LIVES = 10
@@ -30,7 +30,7 @@ class Hangman:
         self.Frame = Frame(self.Window, bg=self.BACKGROUND)
 
         self.Title = Label(self.Window, text='Hangman', font=('MS PGothic', 20, 'bold'), bg=self.BACKGROUND, fg='WHITE').place(relx=.05, rely=.1)
-        self.Missing = Label(self.Window, text='H _ N G M _ N', width=40, height=1, font=('Tahoma', 25, 'bold'), bg=self.BACKGROUND, fg='WHITE', anchor='w')
+        self.Missing = Label(self.Window, text='', width=40, height=1, font=('Tahoma', 25, 'bold'), bg=self.BACKGROUND, fg='WHITE', anchor='w')
         self.State = Label(self.Window, text='Waiting for match', font=('MS PGothic', 12, 'bold'), bg=self.BACKGROUND, width=16, fg=Colour.GREY, anchor='e')
         self.Lives = Label(self.Window, text='-- Lives remaining', font=('MS PGothic', 16, 'bold'), bg=self.BACKGROUND, width=16, fg=Colour.GREY, anchor='e')
         self.Subtitle = Label(self.Window, text='Warning', font=('Arial', 10, 'bold '), bg=self.BACKGROUND, width=30, fg=Colour.ORANGE, anchor='w')
@@ -104,7 +104,7 @@ class Hangman:
         self.Request.place_forget()
         self.Restart.place_forget()
         self.Lives.config(text='-- Lives remaining')
-        self.Missing.config(text='H _ N G M _ N')
+        self.Missing.config(text='')
         self.build()
 
     def warn(self, m, t='Warning'):
@@ -133,32 +133,35 @@ class Hangman:
             if Letter.cget('text') == l.upper():
                 Letter.place_forget()
                 break
-        self.validate()
-        if '_' not in list(self.MISSING_WORD) or self.GAME_LIVES <= 0:
-            self.state(2)
 
     def submit(self):
-        print(self.Mode, self.GAME_WORD, self.MISSING_WORD)
         if self.Mode == 'Join':
             x, y = self.Window.winfo_pointerxy()
             widget = self.Window.winfo_containing(x, y)
-            data = {'data-type': 'letter-guess', 'letter': widget.cget('text'), 'token': self.GAME_CODE}
             self.guess(widget.cget('text'))
-            self.Session.send(str(data))
+            self.Session.send(str({'data-type': 'letter-guess', 'letter': widget.cget('text'), 'token': self.GAME_CODE}))
 
     def host(self):
         self.clear()
         self.layout()
         self.Chat.place(relx=.21, rely=.85)
         self.Mode = 'Host'
-        self.Window.after(1, self.Session.send(str({'data-type': 'game-word', 'word': self.GAME_WORD, 'token': self.GAME_CODE})))
+        self.GAME_LIVES = 10
+        self.Window.after(1, lambda: self.Session.send(str({'data-type': 'game-start', 'word': self.GAME_WORD, 'lives': self.GAME_LIVES, 'token': self.GAME_CODE})))
+        self.Window.after(125, self.Session.send(str({'data-type': 'game-word', 'word': self.GAME_WORD, 'token': self.GAME_CODE})))
         self.MISSING_WORD = '_' * len(self.GAME_WORD)
         self.Window.after(250, lambda: self.Session.send(str({'data-type': 'missing-word', 'word': self.MISSING_WORD, 'token': self.GAME_CODE})))
         for Letter in self.Buttons:
             Letter.config(state=DISABLED)
 
     def lobby(self):
-        pass
+        pass # Push lobby data request to server
+
+    def list(self, d):
+        pass # Handle and process lobby data: d
+
+    def screen(self):
+        pass # Toggle lobby screen on/off
 
     def join(self):
         self.layout()
@@ -167,6 +170,10 @@ class Hangman:
         self.Request.place(relx=.355, rely=.85)
         self.Mode = 'Join'
         self.Session.send(str({'data-type': 'refresh', 'token': self.GAME_CODE}))
+
+    def update(self):
+        self.Missing.config(text=' '.join(list(self.MISSING_WORD)))
+        self.Lives.config(text=f'{self.GAME_LIVES} lives remaining')
 
     def restart(self):
         for Letter in self.Buttons:
@@ -224,7 +231,7 @@ class Hangman:
             self.warn('The word you entered is invalid (must contains letters only)', 'Word')
 
     def refresh(self):
-        self.Lives.config(text='10 Lives remaining')
+        self.Lives.config(text=f'{self.GAME_LIVES} Lives remaining')
         time.sleep(0.125)
         self.Session.send(str({'data-type': 'game-lives', 'lives': str(self.GAME_LIVES), 'token': self.GAME_CODE}))
         time.sleep(0.125)
@@ -284,10 +291,6 @@ class Hangman:
                 self.Solved.place_forget()
             elif self.Mode == 'Host':
                 self.Restart.place(relx=.36, rely=.85)
-
-    def validate(self):
-        if '_' not in list(self.MISSING_WORD) or self.GAME_LIVES <= 0:
-            self.state(2)
 
 
 if __name__ == '__main__':

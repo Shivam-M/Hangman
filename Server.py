@@ -36,6 +36,12 @@ class Host:
             Logger.error(error)
         Logger.log(m, 'MESSAGE')
 
+    def gameUpdate(self, t):
+        self.send(str({'data-type': 'game-update',
+                       'lives': self.gameWords[t]['lives'],
+                       'missing': self.gameWords[t]['missing'],
+                       'token': t}))
+
     def listen(self):
         while True:
             try:
@@ -62,45 +68,48 @@ class Host:
                                 sessionData = literal_eval(receivedData)
                             except:
                                 continue
-                            if sessionData['token'] not in self.gameTokens:
-                                self.gameTokens.append(sessionData['token'])
-                                self.gameWords[sessionData['token']] = ''
-                            if sessionData['data-type'] == 'game-word':
-                                try:
-                                    if self.gameWords[sessionData['token']]['game-word']:
-                                        try:
-                                            if self.gameWords[sessionData['token']]['over'] == 'true':
-                                                self.gameWords[sessionData['token']] = {'game-word': sessionData['word']}
-                                                self.gameWords[sessionData['token']]['missing-word'] = '_' * len(sessionData['word'])
-                                                self.gameWords[sessionData['token']]['over'] = 'false'
-                                                self.gameWords[sessionData['token']]['game-lives'] = '10'
-                                        except:
-                                            pass
-                                except:
-                                    self.gameWords[sessionData['token']] = {'game-word': sessionData['word']}
-                                    self.gameWords[sessionData['token']]['missing-word'] = '_' * len(sessionData['word'])
-                                    print(str(self.gameWords))
-                            elif sessionData['data-type'] == 'game-lives':
-                                self.gameWords[sessionData['token']]['game-lives'] = sessionData['lives']
+                            if sessionData['data-type'] == 'game-start':
+                                gameToken = sessionData['token']
+                                gameLives = sessionData['lives']
+                                gameWord = sessionData['word']
+                                missingWord = len(gameWord) * '_'
+                                self.gameWords[gameToken] = {'lives': gameLives, 'word': gameWord, 'missing': missingWord, 'letters': []}
+                                Logger.log(F'Started match with word: {gameWord} [{gameToken}] lives: {gameLives}', 'GAME')
+                                continue
+                            elif sessionData['data-type'] == 'refresh':
+                                self.send(str({'data-type': 'game-update', 'word': self.gameWords[sessionData['token']]['word'], 'lives': self.gameWords[sessionData['token']]['lives'], 'missing': self.gameWords[sessionData['token']]['missing'], 'token': sessionData['token']}))
                                 continue
                             elif sessionData['data-type'] == 'letter-guess':
-                                gameWord = self.gameWords[sessionData['token']]['game-word']
-                                print(gameWord)
-                                if sessionData['letter'].upper() not in list(gameWord.upper()):
-                                    time.sleep(0.3)
-                                    gameLives = int(self.gameWords[sessionData['token']]['game-lives']) - 1
-                                    self.gameWords[sessionData['token']]['game-lives'] = str(gameLives)
-                                    self.send(str({'data-type': 'game-lives', 'lives': str(gameLives), 'token': sessionData['token'], 'override': 'true'}))
+                                gameLetter = sessionData['letter'].upper()
+                                gameLetters = self.gameWords[sessionData['token']]['letters']
+                                gameWord = self.gameWords[sessionData['token']]['word'].upper()
+                                gameLives = int(self.gameWords[sessionData['token']]['lives'])
+                                gameMissing = self.gameWords[sessionData['token']]['missing'].upper()
+                                if gameLetter not in list(gameWord):
+                                    self.gameWords[sessionData['token']]['lives'] = str(int(gameLives) - 1)
+                                    self.gameUpdate(sessionData['token'])
                                 else:
-                                    for x in range(len(list(gameWord))):
-                                        if list(gameWord.upper())[x] == sessionData['letter'].upper():
-                                            Temp = list(self.gameWords[sessionData['token']]['missing-word'].upper())
-                                            Temp[x] = sessionData['letter']
-                                            missingWord = ''.join(Temp)
-                                            self.gameWords[sessionData['token']]['missing-word'] = missingWord
-                                            if '_' not in list(missingWord) or int(self.gameWords[sessionData['token']]['game-lives']) <= 0:
-                                                self.gameWords[sessionData['token']]['over'] = 'true'
-                                            self.send(str({'data-type': 'missing-word', 'word': missingWord, 'token': sessionData['token']}))
+                                    missingWord = gameMissing
+                                    if gameLetter not in gameLetters:
+                                        for x in range(len(list(gameWord))):
+                                            if list(gameWord)[x] == gameLetter:
+                                                Temp = list(missingWord)
+                                                Temp[x] = gameLetter
+                                                missingWord = ''.join(Temp)
+                                        self.gameWords[sessionData['token']]['missing'] = missingWord
+                                        self.gameUpdate(sessionData['token'])
+                                    if '_' not in list(missingWord):
+                                        self.send(str({'data-type': 'over', 'word': self.gameWords[sessionData['token']]['word'], 'token': sessionData['token']}))
+                                if int(self.gameWords[sessionData['token']]['lives']) <= 0:
+                                    self.send(str({'data-type': 'over', 'word': self.gameWords[sessionData['token']]['word'], 'token': sessionData['token']}))
+                                continue
+                            elif sessionData['data-type'] == 'word-guess':
+                                guessedWord = sessionData['word'].upper()
+                                gameWord = self.gameWords[sessionData['token']]['word'].upper()
+                                if guessedWord == gameWord:
+                                    self.send(str({'data-type': 'over', 'word': self.gameWords[sessionData['token']]['word'], 'token': sessionData['token']}))
+                                else:
+                                    self.send(str({'data-type': 'game-notification', 'chat': 'Someone guessed incorrectly!', 'token': sessionData['token']}))
                                 continue
                             self.send(receivedData)
             except Exception as error:

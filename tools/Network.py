@@ -46,14 +46,14 @@ class NetworkM:
     def listen(self):
         while self.activeConnection:
             try:
-                receivedData = self.gameSocket.recv(100).decode()
+                receivedData = self.gameSocket.recv(150).decode()
             except:
                 receivedData = None
             if receivedData:
                 print(receivedData)
                 try:
                     sessionData = literal_eval(receivedData)
-                except:
+                except Exception:
                     continue
                 if sessionData['token'] == self.gameInstance.GAME_CODE:
                     if sessionData['data-type'] == 'game-update':
@@ -75,6 +75,9 @@ class NetworkM:
                     elif sessionData['data-type'] == 'over':
                         self.gameInstance.GAME_WORD = sessionData['word']
                         self.gameInstance.state(2)
+                    elif sessionData['data-type'] == 'lobby-data':
+                        if self.gameInstance.Asked:
+                            self.gameInstance.list(sessionData)
 
         Logger.log('Connection error - no longer listening.', 'ERROR')
 

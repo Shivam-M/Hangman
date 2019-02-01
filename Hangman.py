@@ -2,20 +2,23 @@ import random
 import time
 from tkinter import *
 from string import ascii_uppercase
+from tkinter.font import Font
+
 from tools.Colours import Colours
 from tools.Network import NetworkM
 Colour = Colours()
 
-# TODO: Server-side word and guess handling
+# TODO: Server-side word and guess handling - done
 # TODO: Guessing punishments - done
 # TODO: Hints under word layout - done
 # TODO: Chat system using new data format - done
+# TODO: Lobby system to make joining games faster - done
 
 
 class Hangman:
     def __init__(self):
 
-        self._VERSION = 1.03
+        self._VERSION = 1.04
         self.GAME_CODE = ''
         self.GAME_WORD = ''
         self.GAME_LIVES = 10
@@ -30,9 +33,9 @@ class Hangman:
         self.Frame = Frame(self.Window, bg=self.BACKGROUND)
 
         self.Title = Label(self.Window, text='Hangman', font=('MS PGothic', 20, 'bold'), bg=self.BACKGROUND, fg='WHITE').place(relx=.05, rely=.1)
-        self.Missing = Label(self.Window, text='', width=40, height=1, font=('Tahoma', 25, 'bold'), bg=self.BACKGROUND, fg='WHITE', anchor='w')
+        self.Missing = Label(self.Window, text='Join or Host a match', width=40, height=1, font=('Courier new', 25, 'bold'), bg=self.BACKGROUND, fg='WHITE', anchor='w')
         self.State = Label(self.Window, text='Waiting for match', font=('MS PGothic', 12, 'bold'), bg=self.BACKGROUND, width=16, fg=Colour.GREY, anchor='e')
-        self.Lives = Label(self.Window, text='-- Lives remaining', font=('MS PGothic', 16, 'bold'), bg=self.BACKGROUND, width=16, fg=Colour.GREY, anchor='e')
+        self.Lives = Label(self.Window, text='-- Lives remaining', font=('Courier New', 16, 'bold'), bg=self.BACKGROUND, width=20, fg=Colour.GREY, anchor='e')
         self.Subtitle = Label(self.Window, text='Warning', font=('Arial', 10, 'bold '), bg=self.BACKGROUND, width=30, fg=Colour.ORANGE, anchor='w')
         self.Warning = Label(self.Window, text='Submitting an incorrect guess will cost two lives for the whole team.', font=('Arial', 10, ' '), bg=self.BACKGROUND, fg=Colour.LIGHT_GREY)
         self.Host = Button(self.Window, text='Host match', font=('MS PGothic', 12, 'bold'), bg=self.BACKGROUND, fg=Colour.ORANGE, bd=0, command=lambda: self.word())
@@ -49,12 +52,13 @@ class Hangman:
         self.Solved = Entry(self.Window, font=('MS PGothic', 10, 'bold'), width=11, bg=self.BACKGROUND, fg='WHITE', bd=4)
         self.Message = Entry(self.Frame, font=('Courier new', 10, 'bold'), width=30, bg=self.BACKGROUND, fg='WHITE', bd=4)
         self.History = Text(self.Frame, bg=self.BACKGROUND, bd=3, height=6, width=35)
+        self.Listing = Label(self.Window)
 
         self.Missing.place(relx=.0495, rely=.25)
         self.Host.place(relx=.05, rely=.85)
         self.Join.place(relx=.20, rely=.85)
         self.State.place(relx=.75, rely=.85)
-        self.Lives.place(relx=.615, rely=.27)
+        self.Lives.place(relx=.625, rely=.27)
 
         self.History.place(relx=.006, rely=.0)
         self.Message.place(relx=.006, rely=.8)
@@ -64,30 +68,31 @@ class Hangman:
 
         self.Letters = list(ascii_uppercase)
         self.Buttons = []
+        self.Position = [0.005, 0.1]
         self.build()
-
+        
         self.Session = NetworkM('127.0.0.1', 6666, self)
         self.Session.run()
         self.Mode = ''
         self.Requested = True
         self.Restarting = False
         self.Chatting = False
+        self.Asked = False
 
         self.Window.mainloop()
 
     def build(self):
+        self.Missing.config(fg=Colour.DARK_RED)
         self.Buttons = []
         Position = [0.05, 0.45]
         for Letter in self.Letters:
-            Temp = Button(self.Window, text=Letter, font=('MS PGothic', 12, 'bold'), bg=self.BACKGROUND, fg='Yellow', bd=0, command=lambda: self.submit())
+            Temp = Button(self.Window, text=Letter, font=('Courier New', 12, 'bold'), bg=self.BACKGROUND, fg=Colour.RED, bd=0, command=lambda: self.submit())
             Temp.place(relx=Position[0], rely=Position[1])
             self.Buttons.append(Temp)
             Position[0] += 0.042
             if Letter == 'M':
                 Position[0] = 0.05
                 Position[1] = 0.55
-            elif Letter == 'Y':
-                Position[0] += 0.003
 
     def leave(self):
         for Letter in self.Buttons:
@@ -142,6 +147,8 @@ class Hangman:
             self.Session.send(str({'data-type': 'letter-guess', 'letter': widget.cget('text'), 'token': self.GAME_CODE}))
 
     def host(self):
+        self.Missing.config(text=' '.join(list('_' * len(self.GAME_WORD))))
+        self.Listing.place_forget()
         self.clear()
         self.layout()
         self.Chat.place(relx=.21, rely=.85)
@@ -155,15 +162,52 @@ class Hangman:
             Letter.config(state=DISABLED)
 
     def lobby(self):
-        pass # Push lobby data request to server
+        self.Asked = True
+        self.Session.send(str({'data-type': 'lobby-request'}))
 
     def list(self, d):
-        pass # Handle and process lobby data: d
+        lobbyWords = d['words']
+        lobbyLives = d['lives']
+        lobbyTokens = d['tokens']
+        self.Listing = Frame(self.Window, bg='#181818')
+        Unavailable = Label(self.Listing, text='No lobbies currently available', font=('Courier new', 14, 'bold'))
+        self.Listing.place(relx=0.0525, rely=0.21, width=450, height=185)
+        self.Position = [0.005, 0.1]
+        Counter = 1
+        for word in lobbyWords:
+            if Counter == 3:
+                self.Position[0] += 0.5
+                self.Position[1] = 0.1
+            itemIndex = lobbyWords.index(word)
+            self.panel(word, lobbyLives[itemIndex], lobbyTokens[itemIndex])
+            self.Position[1] += 0.4
+            Counter += 1
+        if len(lobbyWords) == 0:
+            Unavailable.place(relx=.125, rely=.05)
+        else:
+            Unavailable.place_forget()
+        self.Asked = False
 
-    def screen(self):
-        pass # Toggle lobby screen on/off
+    def panel(self, word, lives, token):
+        fn = 'Courier New'
+        GameTitle = Button(self.Listing, bg='#181818', fg=Colour.DARK_SEA_GREEN, font=(fn, 12, 'bold'), bd=0, text=f'Match ID: {token}', command=lambda: self.connect(token))
+        GameTitle.place(relx=self.Position[0] - 0.003, rely=self.Position[1])
+        Button(self.Listing, bg='#181818', fg=Colour.SEA_GREEN, font=(fn, 10, 'bold'), bd=0, text=f'Word: {" ".join(list(word))}', command=lambda: self.connect(token)).place(relx=self.Position[0] - 0.002, rely=self.Position[1] + 0.135)
+        Button(self.Listing, bg='#181818', fg=Colour.SEA_GREEN, font=(fn, 10, 'bold'), bd=0, text=f'Lives: {lives}', command=lambda: self.connect(token)).place(relx=self.Position[0] - 0.003, rely=self.Position[1] + 0.238)
+        f = Font(GameTitle, GameTitle.cget("font"))
+        f.configure(underline = True)
+        GameTitle.configure(font=f)
+
+    def connect(self, t):
+        self.GAME_CODE = t
+        self.Code.place_forget()
+        self.Listing.place_forget()
+        self.join()
 
     def join(self):
+        self.Code.place_forget()
+        self.Word.place_forget()
+        self.Listing.place_forget()
         self.layout()
         self.Guess.place(relx=.515, rely=.85)
         self.Chat.place(relx=.21, rely=.85)
@@ -176,6 +220,7 @@ class Hangman:
         self.Lives.config(text=f'{self.GAME_LIVES} lives remaining')
 
     def restart(self):
+        self.Listing.place_forget()
         for Letter in self.Buttons:
             Letter.place_forget()
         self.build()
@@ -202,6 +247,7 @@ class Hangman:
         self.word()
 
     def layout(self):
+        self.Listing.place_forget()
         self.state(1)
         self.Host.place_forget()
         self.Join.place_forget()
@@ -210,6 +256,7 @@ class Hangman:
     def code(self):
         self.Code.place(relx=.345, rely=.85)
         self.Code.bind('<Return>', lambda event: self.check())
+        self.lobby()
 
     def check(self):
         self.GAME_CODE = self.Code.get()

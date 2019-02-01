@@ -53,7 +53,7 @@ class Host:
                         Logger.log(f'Client [{address[0]}:{address[1]}] connected to the server.', 'CONNECT')
                     else:
                         try:
-                            receivedData = sock.recv(100).decode()
+                            receivedData = sock.recv(150).decode()
                         except:
                             try:
                                 Logger.log(f'Client [{address[0]}:{address[1]}] disconnected from the server.', 'DISCONNECT')
@@ -110,6 +110,16 @@ class Host:
                                     self.send(str({'data-type': 'over', 'word': self.gameWords[sessionData['token']]['word'], 'token': sessionData['token']}))
                                 else:
                                     self.send(str({'data-type': 'game-notification', 'chat': 'Someone guessed incorrectly!', 'token': sessionData['token']}))
+                                continue
+                            elif sessionData['data-type'] == 'lobby-request':
+                                gameWords = []
+                                gameLives = []
+                                gameTokens = []
+                                for token in self.gameWords:
+                                    gameWords.append(self.gameWords[token]['missing'])
+                                    gameLives.append(self.gameWords[token]['lives'])
+                                    gameTokens.append(token)
+                                self.send(str({'data-type': 'lobby-data', 'words': gameWords, 'lives': gameLives, 'tokens': gameTokens, 'token': ''}))
                                 continue
                             self.send(receivedData)
             except Exception as error:

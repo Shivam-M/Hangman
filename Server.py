@@ -108,8 +108,11 @@ class Host:
                                 gameWord = self.gameWords[sessionData['token']]['word'].upper()
                                 if guessedWord == gameWord:
                                     self.send(str({'data-type': 'over', 'word': self.gameWords[sessionData['token']]['word'], 'token': sessionData['token']}))
+                                    self.gameWords[sessionData['token']]['missing'] = gameWord
                                 else:
                                     self.send(str({'data-type': 'game-notification', 'chat': 'Someone guessed incorrectly!', 'token': sessionData['token']}))
+                                    self.gameWords[sessionData['token']]['lives'] = str(int(self.gameWords[sessionData['token']]['lives']) - 2)
+                                    self.gameUpdate(sessionData['token'])
                                 continue
                             elif sessionData['data-type'] == 'lobby-request':
                                 gameWords = []

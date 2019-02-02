@@ -21,10 +21,12 @@ class NetworkM:
 
         self.listeningThread = Thread(target=self.listen)
         self.activeConnection = True
+        self.gameConnection = False
 
     def connect(self):
         try:
             self.gameSocket.connect((self.connectionIP, self.connectPort))
+            self.gameConnection = True
             return True
         except:
             return False

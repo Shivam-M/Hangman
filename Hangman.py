@@ -18,12 +18,15 @@ Colour = Colours()
 class Hangman:
     def __init__(self):
 
-        self._VERSION = 1.04
+        self._VERSION = 1.05
         self.GAME_CODE = ''
         self.GAME_WORD = ''
         self.GAME_LIVES = 10
         self.MISSING_WORD = ''
         self.BACKGROUND = '#141414'
+
+        self.connectionIP = '127.0.0.1'
+        self.connectionPort = 6666
 
         self.Window = Tk()
         self.Window.geometry('800x300')
@@ -36,8 +39,8 @@ class Hangman:
         self.Missing = Label(self.Window, text='Join or Host a match', width=40, height=1, font=('Courier new', 25, 'bold'), bg=self.BACKGROUND, fg='WHITE', anchor='w')
         self.State = Label(self.Window, text='Waiting for match', font=('MS PGothic', 12, 'bold'), bg=self.BACKGROUND, width=16, fg=Colour.GREY, anchor='e')
         self.Lives = Label(self.Window, text='-- Lives remaining', font=('Courier New', 16, 'bold'), bg=self.BACKGROUND, width=20, fg=Colour.GREY, anchor='e')
-        self.Subtitle = Label(self.Window, text='Warning', font=('Arial', 10, 'bold '), bg=self.BACKGROUND, width=30, fg=Colour.ORANGE, anchor='w')
-        self.Warning = Label(self.Window, text='Submitting an incorrect guess will cost two lives for the whole team.', font=('Arial', 10, ' '), bg=self.BACKGROUND, fg=Colour.LIGHT_GREY)
+        self.Subtitle = Label(self.Window, text='Warning', font=('Courier new', 10, 'bold '), bg=self.BACKGROUND, width=30, fg=Colour.ORANGE, anchor='w')
+        self.Warning = Label(self.Window, text='Submitting an incorrect guess will cost two lives for the whole team.', font=('Courier new', 10, 'bold'), bg=self.BACKGROUND, fg=Colour.LIGHT_GREY)
         self.Host = Button(self.Window, text='Host match', font=('MS PGothic', 12, 'bold'), bg=self.BACKGROUND, fg=Colour.ORANGE, bd=0, command=lambda: self.word())
         self.Join = Button(self.Window, text='Join match', font=('MS PGothic', 12, 'bold'), bg=self.BACKGROUND, fg=Colour.LIGHT_BLUE, bd=0, command=lambda: self.code())
         self.Leave = Button(self.Window, text='Leave match', font=('MS PGothic', 12, 'bold'), bg=self.BACKGROUND, fg=Colour.RED, bd=0, command=lambda: self.leave())
@@ -69,10 +72,10 @@ class Hangman:
         self.Letters = list(ascii_uppercase)
         self.Buttons = []
         self.Position = [0.005, 0.1]
-        self.build()
         
-        self.Session = NetworkM('127.0.0.1', 6666, self)
+        self.Session = NetworkM(self.connectionIP, self.connectionPort, self)
         self.Session.run()
+        self.build()
         self.Mode = ''
         self.Requested = True
         self.Restarting = False
@@ -82,6 +85,7 @@ class Hangman:
         self.Window.mainloop()
 
     def build(self):
+        self.Listing.place_forget()
         self.Missing.config(fg=Colour.DARK_RED)
         self.Buttons = []
         Position = [0.05, 0.45]
@@ -93,6 +97,9 @@ class Hangman:
             if Letter == 'M':
                 Position[0] = 0.05
                 Position[1] = 0.55
+        if not self.Session.gameConnection:
+            self.Missing.config(bg=Colour.DARK_RED, fg='#141414', text='Connection failed')
+            self.warn(f'Failed to connect to the game servers - retrying connection every five seconds', 'Offline')
 
     def leave(self):
         for Letter in self.Buttons:

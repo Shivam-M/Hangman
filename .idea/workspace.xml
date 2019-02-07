@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="53113028-de47-4e0c-be7f-15225a844da7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hangman.py" beforeDir="false" afterPath="$PROJECT_DIR$/Hangman.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/Network.py" beforeDir="false" afterPath="$PROJECT_DIR$/tools/Network.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,29 +16,67 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Hangman.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="99" column="43" lean-forward="true" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
+            <state relative-caret-position="2431">
+              <caret line="150" column="12" selection-start-line="150" selection-start-column="12" selection-end-line="151" selection-end-column="55" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/Network.py">
+        <entry file="file://$PROJECT_DIR$/Game-Updater.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="45" column="87" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="87" />
+            <state relative-caret-position="867">
+              <caret line="54" column="29" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/version.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="3" selection-start-column="3" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Account-Manager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Server.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Chat-program.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="113" column="70" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
+            <state relative-caret-position="17">
+              <caret line="162" column="12" selection-start-line="162" selection-start-column="12" selection-end-line="162" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/Program Files/Python37/Lib/tkinter/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2312">
+              <caret line="139" column="11" selection-start-line="139" selection-start-column="6" selection-end-line="139" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Chat-server.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -57,6 +93,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Server.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -68,11 +113,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>release</find>
-      <find>self.Session.send</find>
-      <find>self.Mis</find>
-      <find>lives</find>
-      <find>SELF.ACTIV</find>
       <find>lives remaining</find>
       <find>-- lives remaining</find>
       <find>self.Join.pla</find>
@@ -98,6 +138,11 @@
       <find>join</find>
       <find>def join</find>
       <find>state</find>
+      <find>warn</find>
+      <find>lambda ev</find>
+      <find>tag</find>
+      <find>self.Username =</find>
+      <find>event</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -126,12 +171,21 @@
         <option value="$PROJECT_DIR$/tools/Network.py" />
         <option value="$PROJECT_DIR$/Hangman.py" />
         <option value="$PROJECT_DIR$/Server.py" />
+        <option value="$PROJECT_DIR$/Holder.py" />
+        <option value="$PROJECT_DIR$/Shivam.json" />
+        <option value="$PROJECT_DIR$/update-config.ini" />
+        <option value="$PROJECT_DIR$/version.txt" />
+        <option value="$PROJECT_DIR$/Game-Updater.py" />
+        <option value="$PROJECT_DIR$/Secondary.py" />
+        <option value="$PROJECT_DIR$/Chat-program.py" />
+        <option value="$PROJECT_DIR$/builder.py" />
+        <option value="$PROJECT_DIR$/Account_Manager.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="441" />
+    <option name="y" value="55" />
     <option name="width" value="1185" />
     <option name="height" value="787" />
   </component>
@@ -144,6 +198,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -161,11 +216,21 @@
               <item name="Hangman" type="462c0819:PsiDirectoryNode" />
               <item name="Hangman.py" type="8704e2dd:PyFileNode" />
             </path>
+            <path>
+              <item name="Hangman" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hangman" type="462c0819:PsiDirectoryNode" />
+              <item name="Server.py" type="8704e2dd:PyFileNode" />
+            </path>
+            <path>
+              <item name="Hangman" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Hangman" type="462c0819:PsiDirectoryNode" />
+              <item name="Server.py" type="8704e2dd:PyFileNode" />
+              <item name="Host" type="dd8bbb05:PyElementNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -178,12 +243,12 @@
     </force-push-targets>
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Shivam\PycharmProjects\Hangman" />
+      <recent name="C:\Users\Shivam\PycharmProjects\Hangman\tools" />
       <recent name="C:\Users\Shivam\PycharmProjects\bassre" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Shivam\PycharmProjects\Hangman\tools" />
-      <recent name="C:\Users\Shivam\PycharmProjects\Hangman" />
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Shivam\PycharmProjects\bassre" />
     </key>
   </component>
@@ -199,7 +264,70 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Hangman (1)">
+  <component name="RunManager" selected="Python.builder">
+    <configuration name="Account_Manager" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="bassre" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Program Files\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Account_Manager.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Chat-program" type="PythonConfigurationType" factoryName="Python" singleton="false" temporary="true">
+      <module name="bassre" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chat-program.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Chat-server" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="bassre" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Program Files\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Chat-server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="DMT" type="PythonConfigurationType" factoryName="Python" singleton="true">
       <module name="bassre" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -213,48 +341,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DMT.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="GameT" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="bassre" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GameT.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Hangman (1)" type="PythonConfigurationType" factoryName="Python" singleton="false" temporary="true">
-      <module name="bassre" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Hangman.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -284,40 +370,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="NW" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Secondary" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="bassre" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Program Files\Python37\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NW.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Server" type="PythonConfigurationType" factoryName="Python" singleton="true" temporary="true">
-      <module name="bassre" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Server.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Shivam\PycharmProjects\Hangman\Chat-server.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -339,6 +404,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="builder" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="bassre" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Program Files\Python37\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/builder.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -401,20 +487,22 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.Hangman" />
       <item itemvalue="Python.DMT" />
+      <item itemvalue="Python.Hangman" />
       <item itemvalue="Python.server" />
-      <item itemvalue="Python.GameT" />
-      <item itemvalue="Python.NW" />
-      <item itemvalue="Python.Server" />
-      <item itemvalue="Python.Hangman (1)" />
+      <item itemvalue="Python.Account_Manager" />
+      <item itemvalue="Python.Chat-program" />
+      <item itemvalue="Python.Secondary" />
+      <item itemvalue="Python.Chat-server" />
+      <item itemvalue="Python.builder" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Hangman (1)" />
-        <item itemvalue="Python.Server" />
-        <item itemvalue="Python.GameT" />
-        <item itemvalue="Python.NW" />
+        <item itemvalue="Python.builder" />
+        <item itemvalue="Python.Chat-program" />
+        <item itemvalue="Python.Chat-server" />
+        <item itemvalue="Python.Secondary" />
+        <item itemvalue="Python.Account_Manager" />
       </list>
     </recent_temporary>
   </component>
@@ -464,26 +552,33 @@
       <option name="project" value="LOCAL" />
       <updated>1549043744319</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Version 1.05 - Left beta branch including server/lobby features">
+      <created>1549117026226</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1549117026226</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.497191" visible="true" weight="0.115384616" />
-      <window_info id="Structure" order="1" sideWeight="0.502809" side_tool="true" weight="0.07376186" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4964029" visible="true" weight="0.115384616" />
+      <window_info id="Structure" order="1" sideWeight="0.50359714" side_tool="true" weight="0.115384616" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49367756" visible="true" weight="0.31527627" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48840886" visible="true" weight="0.24702059" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49947312" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50632244" side_tool="true" visible="true" weight="0.31527627" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.51159114" side_tool="true" visible="true" weight="0.24702059" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -497,7 +592,8 @@
     <MESSAGE value="Version 1.03 beta - Unstable server-side verification release" />
     <MESSAGE value="Version 1.04 beta - Stable server-side release and functioning lobby system." />
     <MESSAGE value="Version 1.04 pre-release - Stable server-side release and functioning lobby system." />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 1.04 pre-release - Stable server-side release and functioning lobby system." />
+    <MESSAGE value="Version 1.05 - Left beta branch including server/lobby features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 1.05 - Left beta branch including server/lobby features" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/tkinter/__init__.py" />
@@ -505,17 +601,9 @@
     <entry file="file://$PROJECT_DIR$/i.jpg" />
     <entry file="file://$PROJECT_DIR$/chat.py" />
     <entry file="file://$PROJECT_DIR$/test.txt" />
-    <entry file="file://$PROJECT_DIR$/version.txt" />
     <entry file="file://$PROJECT_DIR$/Colours.py" />
     <entry file="file://$PROJECT_DIR$/ConfigManager.py" />
     <entry file="file://$PROJECT_DIR$/config.ini" />
-    <entry file="file://C:/Program Files/Python37/Lib/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="839" column="7" selection-start-line="839" selection-start-column="7" selection-end-line="839" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files/Python37/Lib/ssl.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
@@ -539,13 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="864" selection-start-line="864" selection-end-line="864" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Program Files/Python37/Lib/tkinter/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="1032" column="39" selection-start-line="1032" selection-start-column="39" selection-end-line="1032" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -575,6 +656,66 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Holder.py" />
+    <entry file="file://C:/Program Files/Python37/Lib/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="613">
+          <caret line="839" column="7" selection-start-line="839" selection-start-column="7" selection-end-line="839" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Shivam.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="1" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/Network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="562">
+          <caret line="63" column="50" lean-forward="true" selection-start-line="49" selection-start-column="12" selection-end-line="63" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/update-config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Hangman.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2431">
+          <caret line="150" column="12" selection-start-line="150" selection-start-column="12" selection-end-line="151" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Game-Updater.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="54" column="29" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Program Files/Python37/Lib/tkinter/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2312">
+          <caret line="139" column="11" selection-start-line="139" selection-start-column="6" selection-end-line="139" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat-server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="40" column="58" selection-start-line="40" selection-start-column="58" selection-end-line="40" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tools/Logger.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -585,27 +726,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools/Network.py">
+    <entry file="file://$PROJECT_DIR$/builder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="45" column="87" selection-start-line="45" selection-start-column="87" selection-end-line="45" selection-end-column="87" />
+        <state relative-caret-position="442">
+          <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Chat-program.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="162" column="12" selection-start-line="162" selection-start-column="12" selection-end-line="162" selection-end-column="12" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Hangman.py">
+    <entry file="file://$PROJECT_DIR$/Account_Manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="99" column="43" lean-forward="true" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
+        <state relative-caret-position="816">
+          <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/version.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" selection-start-column="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Account-Manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="113" column="70" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
+        <state relative-caret-position="102">
+          <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
         </state>
       </provider>
     </entry>

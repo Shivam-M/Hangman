@@ -9,7 +9,7 @@ from tools.Logger import Logger
 class Host:
     def __init__(self):
         self.connectionIP = '0.0.0.0'
-        self.connectionPort = 6666
+        self.connectionPort = 5000
 
         self.LIST = []
         self.connectedUsers = {}
@@ -63,7 +63,6 @@ class Host:
                             self.LIST.remove(sock)
                             continue
                         if receivedData:
-                            print(receivedData)
                             try:
                                 sessionData = literal_eval(receivedData)
                             except:

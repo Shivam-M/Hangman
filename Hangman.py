@@ -18,15 +18,15 @@ Colour = Colours()
 class Hangman:
     def __init__(self):
 
-        self._VERSION = 1.05
+        self._VERSION = 1.06
         self.GAME_CODE = ''
         self.GAME_WORD = ''
         self.GAME_LIVES = 10
         self.MISSING_WORD = ''
         self.BACKGROUND = '#141414'
 
-        self.connectionIP = '127.0.0.1'
-        self.connectionPort = 6666
+        self.connectionIP = 'chat-sv.ddns.net'
+        self.connectionPort = 5000
 
         self.Window = Tk()
         self.Window.geometry('800x300')
